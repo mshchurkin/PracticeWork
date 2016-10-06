@@ -1,0 +1,836 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Model1.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityContainer Name="Model1StoreContainer">
+    <EntitySet Name="ComputerSet" EntityType="Model1.Store.ComputerSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConnectionSet" EntityType="Model1.Store.ConnectionSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="DeviceSet" EntityType="Model1.Store.DeviceSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ModelSet" EntityType="Model1.Store.ModelSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="QueueSet" EntityType="Model1.Store.QueueSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RouterSet" EntityType="Model1.Store.RouterSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="RoutineSet" EntityType="Model1.Store.RoutineSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ServerSet" EntityType="Model1.Store.ServerSet" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConnectionComputer" EntityType="Model1.Store.ConnectionComputer" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConnectionDevice" EntityType="Model1.Store.ConnectionDevice" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ConnectionServer" EntityType="Model1.Store.ConnectionServer" store:Type="Tables" Schema="dbo" />
+    <AssociationSet Name="FK_ModelComputer" Association="Model1.Store.FK_ModelComputer">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Computet" EntitySet="ComputerSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConnectionComputer_Computet" Association="Model1.Store.FK_ConnectionComputer_Computet">
+      <End Role="Computet" EntitySet="ComputerSet" />
+      <End Role="ConnectionComputer" EntitySet="ConnectionComputer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConnectionComputer_Connection" Association="Model1.Store.FK_ConnectionComputer_Connection">
+      <End Role="Connection" EntitySet="ConnectionSet" />
+      <End Role="ConnectionComputer" EntitySet="ConnectionComputer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConnectionRouter" Association="Model1.Store.FK_ConnectionRouter">
+      <End Role="Router" EntitySet="RouterSet" />
+      <End Role="Connection" EntitySet="ConnectionSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModelConnection" Association="Model1.Store.FK_ModelConnection">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Connection" EntitySet="ConnectionSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModelDevice" Association="Model1.Store.FK_ModelDevice">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Device" EntitySet="DeviceSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_QueueDevice" Association="Model1.Store.FK_QueueDevice">
+      <End Role="Device" EntitySet="DeviceSet" />
+      <End Role="Queue" EntitySet="QueueSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConnectionDevice_Connection" Association="Model1.Store.FK_ConnectionDevice_Connection">
+      <End Role="Connection" EntitySet="ConnectionSet" />
+      <End Role="ConnectionDevice" EntitySet="ConnectionDevice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConnectionDevice_Device" Association="Model1.Store.FK_ConnectionDevice_Device">
+      <End Role="Device" EntitySet="DeviceSet" />
+      <End Role="ConnectionDevice" EntitySet="ConnectionDevice" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModelRoutine" Association="Model1.Store.FK_ModelRoutine">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Routine" EntitySet="RoutineSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_RoutineQueue" Association="Model1.Store.FK_RoutineQueue">
+      <End Role="Queue" EntitySet="QueueSet" />
+      <End Role="Routine" EntitySet="RoutineSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ModelServer" Association="Model1.Store.FK_ModelServer">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Server" EntitySet="ServerSet" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConnectionServer_Connection" Association="Model1.Store.FK_ConnectionServer_Connection">
+      <End Role="Connection" EntitySet="ConnectionSet" />
+      <End Role="ConnectionServer" EntitySet="ConnectionServer" />
+    </AssociationSet>
+    <AssociationSet Name="FK_ConnectionServer_Server" Association="Model1.Store.FK_ConnectionServer_Server">
+      <End Role="Server" EntitySet="ServerSet" />
+      <End Role="ConnectionServer" EntitySet="ConnectionServer" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="ComputerSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Processor" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RAM" Type="int" Nullable="false" />
+    <Property Name="Memory" Type="int" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="int" Nullable="false" />
+    <Property Name="ModelId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConnectionSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModelId" Type="int" Nullable="false" />
+    <Property Name="D1" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="D2" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Router_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="DeviceSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Memory" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RAM" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="VideoMemory" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModelId" Type="int" Nullable="false" />
+    <Property Name="HaveQueue" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ModelSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="QueueSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="int" Nullable="false" />
+    <Property Name="NumberInQueue" Type="int" Nullable="false" />
+    <Property Name="ModelId" Type="int" Nullable="false" />
+    <Property Name="ConnectionId" Type="int" Nullable="false" />
+    <Property Name="Device_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RouterSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="int" Nullable="false" />
+    <Property Name="ModelId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="RoutineSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Funtcion" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="ModelId" Type="int" Nullable="false" />
+    <Property Name="qId" Type="int" Nullable="false" />
+    <Property Name="Queue_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ServerSet">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="RAM" Type="int" Nullable="false" />
+    <Property Name="Memory" Type="int" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="int" Nullable="false" />
+    <Property Name="ModelId" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConnectionComputer">
+    <Key>
+      <PropertyRef Name="ComputerSet_Id" />
+      <PropertyRef Name="ConnectionSet_Id" />
+    </Key>
+    <Property Name="ComputerSet_Id" Type="int" Nullable="false" />
+    <Property Name="ConnectionSet_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConnectionDevice">
+    <Key>
+      <PropertyRef Name="ConnectionSet_Id" />
+      <PropertyRef Name="DeviceSet_Id" />
+    </Key>
+    <Property Name="ConnectionSet_Id" Type="int" Nullable="false" />
+    <Property Name="DeviceSet_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ConnectionServer">
+    <Key>
+      <PropertyRef Name="ConnectionSet_Id" />
+      <PropertyRef Name="ServerSet_Id" />
+    </Key>
+    <Property Name="ConnectionSet_Id" Type="int" Nullable="false" />
+    <Property Name="ServerSet_Id" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_ModelComputer">
+    <End Role="Model" Type="Model1.Store.ModelSet" Multiplicity="1" />
+    <End Role="Computet" Type="Model1.Store.ComputerSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Computet">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConnectionRouter">
+    <End Role="Router" Type="Model1.Store.RouterSet" Multiplicity="1" />
+    <End Role="Connection" Type="Model1.Store.ConnectionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Router">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Connection">
+        <PropertyRef Name="Router_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModelConnection">
+    <End Role="Model" Type="Model1.Store.ModelSet" Multiplicity="1" />
+    <End Role="Connection" Type="Model1.Store.ConnectionSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Connection">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModelDevice">
+    <End Role="Model" Type="Model1.Store.ModelSet" Multiplicity="1" />
+    <End Role="Device" Type="Model1.Store.DeviceSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Device">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_QueueDevice">
+    <End Role="Device" Type="Model1.Store.DeviceSet" Multiplicity="1" />
+    <End Role="Queue" Type="Model1.Store.QueueSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Device">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Queue">
+        <PropertyRef Name="Device_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModelRoutine">
+    <End Role="Model" Type="Model1.Store.ModelSet" Multiplicity="1" />
+    <End Role="Routine" Type="Model1.Store.RoutineSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Routine">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_RoutineQueue">
+    <End Role="Queue" Type="Model1.Store.QueueSet" Multiplicity="1" />
+    <End Role="Routine" Type="Model1.Store.RoutineSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Queue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Routine">
+        <PropertyRef Name="Queue_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ModelServer">
+    <End Role="Model" Type="Model1.Store.ModelSet" Multiplicity="1" />
+    <End Role="Server" Type="Model1.Store.ServerSet" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Server">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConnectionComputer_Computet">
+    <End Role="Computet" Type="Model1.Store.ComputerSet" Multiplicity="1" />
+    <End Role="ConnectionComputer" Type="Model1.Store.ConnectionComputer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Computet">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConnectionComputer">
+        <PropertyRef Name="ComputerSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConnectionComputer_Connection">
+    <End Role="ConnectionComputer" Type="Model1.Store.ConnectionComputer" Multiplicity="*" />
+    <End Role="Connection" Type="Model1.Store.ConnectionSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Connection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConnectionComputer">
+        <PropertyRef Name="ConnectionSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConnectionDevice_Connection">
+    <End Role="Connection" Type="Model1.Store.ConnectionSet" Multiplicity="1" />
+    <End Role="ConnectionDevice" Type="Model1.Store.ConnectionDevice" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Connection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConnectionDevice">
+        <PropertyRef Name="ConnectionSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConnectionDevice_Device">
+    <End Role="ConnectionDevice" Type="Model1.Store.ConnectionDevice" Multiplicity="*" />
+    <End Role="Device" Type="Model1.Store.DeviceSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Device">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConnectionDevice">
+        <PropertyRef Name="DeviceSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConnectionServer_Connection">
+    <End Role="Connection" Type="Model1.Store.ConnectionSet" Multiplicity="1" />
+    <End Role="ConnectionServer" Type="Model1.Store.ConnectionServer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Connection">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConnectionServer">
+        <PropertyRef Name="ConnectionSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_ConnectionServer_Server">
+    <End Role="ConnectionServer" Type="Model1.Store.ConnectionServer" Multiplicity="*" />
+    <End Role="Server" Type="Model1.Store.ServerSet" Multiplicity="1" />
+    <ReferentialConstraint>
+      <Principal Role="Server">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="ConnectionServer">
+        <PropertyRef Name="ServerSet_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="Model1" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+        <EntityContainer Name="Model1Container" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ComputerSet" EntityType="Model1.Computet" />
+          <EntitySet Name="ConnectionSet" EntityType="Model1.Connection" />
+          <EntitySet Name="DeviceSet" EntityType="Model1.Device" />
+          <EntitySet Name="ModelSet" EntityType="Model1.Model" />
+          <EntitySet Name="QueueSet" EntityType="Model1.Queue" />
+          <EntitySet Name="RouterSet" EntityType="Model1.Router" />
+          <EntitySet Name="RoutineSet" EntityType="Model1.Routine" />
+          <EntitySet Name="ServerSet" EntityType="Model1.Server" />
+          <AssociationSet Name="FK_ModelComputer" Association="Model1.FK_ModelComputer">
+            <End Role="Model" EntitySet="ModelSet" />
+            <End Role="Computet" EntitySet="ComputerSet" />
+          </AssociationSet>
+          <AssociationSet Name="ConnectionComputer" Association="Model1.ConnectionComputer">
+            <End Role="Computet" EntitySet="ComputerSet" />
+            <End Role="Connection" EntitySet="ConnectionSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ConnectionRouter" Association="Model1.FK_ConnectionRouter">
+            <End Role="Router" EntitySet="RouterSet" />
+            <End Role="Connection" EntitySet="ConnectionSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelConnection" Association="Model1.FK_ModelConnection">
+            <End Role="Model" EntitySet="ModelSet" />
+            <End Role="Connection" EntitySet="ConnectionSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelDevice" Association="Model1.FK_ModelDevice">
+            <End Role="Model" EntitySet="ModelSet" />
+            <End Role="Device" EntitySet="DeviceSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_QueueDevice" Association="Model1.FK_QueueDevice">
+            <End Role="Device" EntitySet="DeviceSet" />
+            <End Role="Queue" EntitySet="QueueSet" />
+          </AssociationSet>
+          <AssociationSet Name="ConnectionDevice" Association="Model1.ConnectionDevice">
+            <End Role="Connection" EntitySet="ConnectionSet" />
+            <End Role="Device" EntitySet="DeviceSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelRoutine" Association="Model1.FK_ModelRoutine">
+            <End Role="Model" EntitySet="ModelSet" />
+            <End Role="Routine" EntitySet="RoutineSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoutineQueue" Association="Model1.FK_RoutineQueue">
+            <End Role="Queue" EntitySet="QueueSet" />
+            <End Role="Routine" EntitySet="RoutineSet" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ModelServer" Association="Model1.FK_ModelServer">
+            <End Role="Model" EntitySet="ModelSet" />
+            <End Role="Server" EntitySet="ServerSet" />
+          </AssociationSet>
+          <AssociationSet Name="ConnectionServer" Association="Model1.ConnectionServer">
+            <End Role="Connection" EntitySet="ConnectionSet" />
+            <End Role="Server" EntitySet="ServerSet" />
+          </AssociationSet>
+          <AssociationSet Name="ModelQueue" Association="Model1.ModelQueue">
+            <End Role="Model" EntitySet="ModelSet" />
+            <End Role="Queue" EntitySet="QueueSet" />
+          </AssociationSet>
+          <AssociationSet Name="ModelRouter" Association="Model1.ModelRouter">
+            <End Role="Model" EntitySet="ModelSet" />
+            <End Role="Router" EntitySet="RouterSet" />
+          </AssociationSet>
+          <AssociationSet Name="ConnectionQueue" Association="Model1.ConnectionQueue">
+            <End Role="Connection" EntitySet="ConnectionSet" />
+            <End Role="Queue" EntitySet="QueueSet" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Computet">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Processor" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RAM" Type="Int32" Nullable="false" />
+          <Property Name="Memory" Type="Int32" Nullable="false" />
+          <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModelSet" Relationship="Model1.FK_ModelComputer" FromRole="Computet" ToRole="Model" />
+          <NavigationProperty Name="ConnectionSet" Relationship="Model1.ConnectionComputer" FromRole="Computet" ToRole="Connection" />
+        </EntityType>
+        <EntityType Name="Connection">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="D1" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="D2" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Router_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ComputerSet" Relationship="Model1.ConnectionComputer" FromRole="Connection" ToRole="Computet" />
+          <NavigationProperty Name="RouterSet" Relationship="Model1.FK_ConnectionRouter" FromRole="Connection" ToRole="Router" />
+          <NavigationProperty Name="ModelSet" Relationship="Model1.FK_ModelConnection" FromRole="Connection" ToRole="Model" />
+          <NavigationProperty Name="DeviceSet" Relationship="Model1.ConnectionDevice" FromRole="Connection" ToRole="Device" />
+          <NavigationProperty Name="ServerSet" Relationship="Model1.ConnectionServer" FromRole="Connection" ToRole="Server" />
+          <NavigationProperty Name="Queue" Relationship="Model1.ConnectionQueue" FromRole="Connection" ToRole="Queue" />
+        </EntityType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Memory" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RAM" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="VideoMemory" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="HaveQueue" Type="Boolean" Nullable="false" />
+          <NavigationProperty Name="ModelSet" Relationship="Model1.FK_ModelDevice" FromRole="Device" ToRole="Model" />
+          <NavigationProperty Name="QueueSet" Relationship="Model1.FK_QueueDevice" FromRole="Device" ToRole="Queue" />
+          <NavigationProperty Name="ConnectionSet" Relationship="Model1.ConnectionDevice" FromRole="Device" ToRole="Connection" />
+        </EntityType>
+        <EntityType Name="Model">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="ComputerSet" Relationship="Model1.FK_ModelComputer" FromRole="Model" ToRole="Computet" />
+          <NavigationProperty Name="ConnectionSet" Relationship="Model1.FK_ModelConnection" FromRole="Model" ToRole="Connection" />
+          <NavigationProperty Name="DeviceSet" Relationship="Model1.FK_ModelDevice" FromRole="Model" ToRole="Device" />
+          <NavigationProperty Name="RoutineSet" Relationship="Model1.FK_ModelRoutine" FromRole="Model" ToRole="Routine" />
+          <NavigationProperty Name="ServerSet" Relationship="Model1.FK_ModelServer" FromRole="Model" ToRole="Server" />
+          <NavigationProperty Name="Queue" Relationship="Model1.ModelQueue" FromRole="Model" ToRole="Queue" />
+          <NavigationProperty Name="Router" Relationship="Model1.ModelRouter" FromRole="Model" ToRole="Router" />
+        </EntityType>
+        <EntityType Name="Queue">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+          <Property Name="NumberInQueue" Type="Int32" Nullable="false" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="Device_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="DeviceSet" Relationship="Model1.FK_QueueDevice" FromRole="Queue" ToRole="Device" />
+          <NavigationProperty Name="RoutineSet" Relationship="Model1.FK_RoutineQueue" FromRole="Queue" ToRole="Routine" />
+          <NavigationProperty Name="Model" Relationship="Model1.ModelQueue" FromRole="Queue" ToRole="Model" />
+          <NavigationProperty Name="Connection" Relationship="Model1.ConnectionQueue" FromRole="Queue" ToRole="Connection" />
+          <Property Name="ConnectionId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Router">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ConnectionSet" Relationship="Model1.FK_ConnectionRouter" FromRole="Router" ToRole="Connection" />
+          <NavigationProperty Name="Model" Relationship="Model1.ModelRouter" FromRole="Router" ToRole="Model" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Routine">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Funtcion" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <Property Name="qId" Type="Int32" Nullable="false" />
+          <Property Name="Queue_Id" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModelSet" Relationship="Model1.FK_ModelRoutine" FromRole="Routine" ToRole="Model" />
+          <NavigationProperty Name="QueueSet" Relationship="Model1.FK_RoutineQueue" FromRole="Routine" ToRole="Queue" />
+        </EntityType>
+        <EntityType Name="Server">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="RAM" Type="Int32" Nullable="false" />
+          <Property Name="Memory" Type="Int32" Nullable="false" />
+          <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+          <Property Name="ModelId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ModelSet" Relationship="Model1.FK_ModelServer" FromRole="Server" ToRole="Model" />
+          <NavigationProperty Name="ConnectionSet" Relationship="Model1.ConnectionServer" FromRole="Server" ToRole="Connection" />
+        </EntityType>
+        <Association Name="FK_ModelComputer">
+          <End Type="Model1.Model" Role="Model" Multiplicity="1" />
+          <End Type="Model1.Computet" Role="Computet" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Computet">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConnectionComputer">
+          <End Type="Model1.Computet" Role="Computet" Multiplicity="*" />
+          <End Type="Model1.Connection" Role="Connection" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_ConnectionRouter">
+          <End Type="Model1.Router" Role="Router" Multiplicity="1" />
+          <End Type="Model1.Connection" Role="Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Router">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="Router_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelConnection">
+          <End Type="Model1.Model" Role="Model" Multiplicity="1" />
+          <End Type="Model1.Connection" Role="Connection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Connection">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelDevice">
+          <End Type="Model1.Model" Role="Model" Multiplicity="1" />
+          <End Type="Model1.Device" Role="Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_QueueDevice">
+          <End Type="Model1.Device" Role="Device" Multiplicity="1" />
+          <End Type="Model1.Queue" Role="Queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Queue">
+              <PropertyRef Name="Device_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConnectionDevice">
+          <End Type="Model1.Connection" Role="Connection" Multiplicity="*" />
+          <End Type="Model1.Device" Role="Device" Multiplicity="*" />
+        </Association>
+        <Association Name="FK_ModelRoutine">
+          <End Type="Model1.Model" Role="Model" Multiplicity="1" />
+          <End Type="Model1.Routine" Role="Routine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Routine">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoutineQueue">
+          <End Type="Model1.Queue" Role="Queue" Multiplicity="1" />
+          <End Type="Model1.Routine" Role="Routine" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Queue">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Routine">
+              <PropertyRef Name="Queue_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ModelServer">
+          <End Type="Model1.Model" Role="Model" Multiplicity="1" />
+          <End Type="Model1.Server" Role="Server" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Server">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConnectionServer">
+          <End Type="Model1.Connection" Role="Connection" Multiplicity="*" />
+          <End Type="Model1.Server" Role="Server" Multiplicity="*" />
+        </Association>
+        <Association Name="ModelQueue">
+          <End Type="Model1.Model" Role="Model" Multiplicity="1" />
+          <End Type="Model1.Queue" Role="Queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Queue">
+              <PropertyRef Name="ModelId1" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ModelRouter">
+          <End Type="Model1.Model" Role="Model" Multiplicity="1" />
+          <End Type="Model1.Router" Role="Router" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Model">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Router">
+              <PropertyRef Name="ModelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="ConnectionQueue">
+          <End Type="Model1.Connection" Role="Connection" Multiplicity="*" />
+          <End Type="Model1.Queue" Role="Queue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Connection">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Queue">
+              <PropertyRef Name="ConnectionId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Model1StoreContainer" CdmEntityContainer="Model1Container">
+    <EntitySetMapping Name="ComputerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Computet)">
+        <MappingFragment StoreEntitySet="ComputerSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Processor" ColumnName="Processor" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="Memory" ColumnName="Memory" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConnectionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Connection)">
+        <MappingFragment StoreEntitySet="ConnectionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="D1" ColumnName="D1" />
+          <ScalarProperty Name="D2" ColumnName="D2" />
+          <ScalarProperty Name="Router_Id" ColumnName="Router_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeviceSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Device)">
+        <MappingFragment StoreEntitySet="DeviceSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Memory" ColumnName="Memory" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="VideoMemory" ColumnName="VideoMemory" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="HaveQueue" ColumnName="HaveQueue" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ModelSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Model)">
+        <MappingFragment StoreEntitySet="ModelSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QueueSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Queue)">
+        <MappingFragment StoreEntitySet="QueueSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+          <ScalarProperty Name="NumberInQueue" ColumnName="NumberInQueue" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="Device_Id" ColumnName="Device_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RouterSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Router)">
+        <MappingFragment StoreEntitySet="RouterSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoutineSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Routine)">
+        <MappingFragment StoreEntitySet="RoutineSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Funtcion" ColumnName="Funtcion" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="qId" ColumnName="qId" />
+          <ScalarProperty Name="Queue_Id" ColumnName="Queue_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(Model1.Server)">
+        <MappingFragment StoreEntitySet="ServerSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="Memory" ColumnName="Memory" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ConnectionComputer" TypeName="Model1.ConnectionComputer" StoreEntitySet="ConnectionComputer">
+      <EndProperty Name="Computet">
+        <ScalarProperty Name="Id" ColumnName="ComputerSet_Id" />
+      </EndProperty>
+      <EndProperty Name="Connection">
+        <ScalarProperty Name="Id" ColumnName="ConnectionSet_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ConnectionDevice" TypeName="Model1.ConnectionDevice" StoreEntitySet="ConnectionDevice">
+      <EndProperty Name="Connection">
+        <ScalarProperty Name="Id" ColumnName="ConnectionSet_Id" />
+      </EndProperty>
+      <EndProperty Name="Device">
+        <ScalarProperty Name="Id" ColumnName="DeviceSet_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ConnectionServer" TypeName="Model1.ConnectionServer" StoreEntitySet="ConnectionServer">
+      <EndProperty Name="Connection">
+        <ScalarProperty Name="Id" ColumnName="ConnectionSet_Id" />
+      </EndProperty>
+      <EndProperty Name="Server">
+        <ScalarProperty Name="Id" ColumnName="ServerSet_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping></edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <edmx:Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="False" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+        <DesignerProperty Name="UseLegacyProvider" Value="True" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

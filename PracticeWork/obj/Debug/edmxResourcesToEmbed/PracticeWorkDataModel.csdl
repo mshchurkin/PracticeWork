@@ -1,0 +1,311 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema xmlns="http://schemas.microsoft.com/ado/2009/11/edm" xmlns:cg="http://schemas.microsoft.com/ado/2006/04/codegeneration" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" Namespace="PracticeWorkDataModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" annotation:UseStrongSpatialTypes="false">
+  <EntityContainer Name="PracticeWorkDataModelContainer" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="ModelSet" EntityType="PracticeWorkDataModel.Model" />
+    <EntitySet Name="ComputerSet" EntityType="PracticeWorkDataModel.Computer" />
+    <EntitySet Name="DeviceSet" EntityType="PracticeWorkDataModel.Device" />
+    <EntitySet Name="ServerSet" EntityType="PracticeWorkDataModel.Server" />
+    <EntitySet Name="QueueSet" EntityType="PracticeWorkDataModel.Queue" />
+    <EntitySet Name="RoutineSet" EntityType="PracticeWorkDataModel.Routine" />
+    <EntitySet Name="RouterSet" EntityType="PracticeWorkDataModel.Router" />
+    <EntitySet Name="ConnectionSet" EntityType="PracticeWorkDataModel.Connection" />
+    <AssociationSet Name="ModelComputer" Association="PracticeWorkDataModel.ModelComputer">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Computer" EntitySet="ComputerSet" />
+    </AssociationSet>
+    <AssociationSet Name="ModelConnection" Association="PracticeWorkDataModel.ModelConnection">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Connection" EntitySet="ConnectionSet" />
+    </AssociationSet>
+    <AssociationSet Name="ModelDevice" Association="PracticeWorkDataModel.ModelDevice">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Device" EntitySet="DeviceSet" />
+    </AssociationSet>
+    <AssociationSet Name="ModelRouter" Association="PracticeWorkDataModel.ModelRouter">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Router" EntitySet="RouterSet" />
+    </AssociationSet>
+    <AssociationSet Name="ModelQueue" Association="PracticeWorkDataModel.ModelQueue">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Queue" EntitySet="QueueSet" />
+    </AssociationSet>
+    <AssociationSet Name="ModelRoutine" Association="PracticeWorkDataModel.ModelRoutine">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Routine" EntitySet="RoutineSet" />
+    </AssociationSet>
+    <AssociationSet Name="ModelServer" Association="PracticeWorkDataModel.ModelServer">
+      <End Role="Model" EntitySet="ModelSet" />
+      <End Role="Server" EntitySet="ServerSet" />
+    </AssociationSet>
+    <AssociationSet Name="DeviceQueue" Association="PracticeWorkDataModel.DeviceQueue">
+      <End Role="Device" EntitySet="DeviceSet" />
+      <End Role="Queue" EntitySet="QueueSet" />
+    </AssociationSet>
+    <AssociationSet Name="QueueRoutine" Association="PracticeWorkDataModel.QueueRoutine">
+      <End Role="Queue" EntitySet="QueueSet" />
+      <End Role="Routine" EntitySet="RoutineSet" />
+    </AssociationSet>
+    <AssociationSet Name="RouterConnection" Association="PracticeWorkDataModel.RouterConnection">
+      <End Role="Router" EntitySet="RouterSet" />
+      <End Role="Connection" EntitySet="ConnectionSet" />
+    </AssociationSet>
+    <AssociationSet Name="ConnectionServer" Association="PracticeWorkDataModel.ConnectionServer">
+      <End Role="Connection" EntitySet="ConnectionSet" />
+      <End Role="Server" EntitySet="ServerSet" />
+    </AssociationSet>
+    <AssociationSet Name="ConnectionDevice" Association="PracticeWorkDataModel.ConnectionDevice">
+      <End Role="Connection" EntitySet="ConnectionSet" />
+      <End Role="Device" EntitySet="DeviceSet" />
+    </AssociationSet>
+    <AssociationSet Name="ConnectionQueue" Association="PracticeWorkDataModel.ConnectionQueue">
+      <End Role="Connection" EntitySet="ConnectionSet" />
+      <End Role="Queue" EntitySet="QueueSet" />
+    </AssociationSet>
+    <AssociationSet Name="ConnectionComputer" Association="PracticeWorkDataModel.ConnectionComputer">
+      <End Role="Connection" EntitySet="ConnectionSet" />
+      <End Role="Computer" EntitySet="ComputerSet" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <NavigationProperty Name="Computer" Relationship="PracticeWorkDataModel.ModelComputer" FromRole="Model" ToRole="Computer" />
+    <NavigationProperty Name="Connection" Relationship="PracticeWorkDataModel.ModelConnection" FromRole="Model" ToRole="Connection" />
+    <NavigationProperty Name="Device" Relationship="PracticeWorkDataModel.ModelDevice" FromRole="Model" ToRole="Device" />
+    <NavigationProperty Name="Router" Relationship="PracticeWorkDataModel.ModelRouter" FromRole="Model" ToRole="Router" />
+    <NavigationProperty Name="Queue" Relationship="PracticeWorkDataModel.ModelQueue" FromRole="Model" ToRole="Queue" />
+    <NavigationProperty Name="Routine" Relationship="PracticeWorkDataModel.ModelRoutine" FromRole="Model" ToRole="Routine" />
+    <NavigationProperty Name="Server" Relationship="PracticeWorkDataModel.ModelServer" FromRole="Model" ToRole="Server" />
+  </EntityType>
+  <EntityType Name="Computer">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Processor" Type="String" Nullable="false" />
+    <Property Name="RAM" Type="Int32" Nullable="true" />
+    <Property Name="Memory" Type="Int32" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Model" Relationship="PracticeWorkDataModel.ModelComputer" FromRole="Computer" ToRole="Model" />
+    <Property Name="ModelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Connection" Relationship="PracticeWorkDataModel.ConnectionComputer" FromRole="Computer" ToRole="Connection" />
+  </EntityType>
+  <EntityType Name="Device">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="RAM" Type="Int32" Nullable="false" />
+    <Property Name="Memory" Type="Int32" Nullable="false" />
+    <Property Name="VideoMemory" Type="Int32" Nullable="false" />
+    <Property Name="HaveQueue" Type="Boolean" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Model" Relationship="PracticeWorkDataModel.ModelDevice" FromRole="Device" ToRole="Model" />
+    <Property Name="ModelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Queue" Relationship="PracticeWorkDataModel.DeviceQueue" FromRole="Device" ToRole="Queue" />
+    <NavigationProperty Name="Connection" Relationship="PracticeWorkDataModel.ConnectionDevice" FromRole="Device" ToRole="Connection" />
+  </EntityType>
+  <EntityType Name="Server">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="RAM" Type="Int32" Nullable="false" />
+    <Property Name="Memory" Type="Int32" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Model" Relationship="PracticeWorkDataModel.ModelServer" FromRole="Server" ToRole="Model" />
+    <Property Name="ModelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Connection" Relationship="PracticeWorkDataModel.ConnectionServer" FromRole="Server" ToRole="Connection" />
+  </EntityType>
+  <EntityType Name="Queue">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="NumberInQueue" Type="Int32" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Model" Relationship="PracticeWorkDataModel.ModelQueue" FromRole="Queue" ToRole="Model" />
+    <Property Name="ModelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Device" Relationship="PracticeWorkDataModel.DeviceQueue" FromRole="Queue" ToRole="Device" />
+    <NavigationProperty Name="Routine" Relationship="PracticeWorkDataModel.QueueRoutine" FromRole="Queue" ToRole="Routine" />
+    <NavigationProperty Name="Connection" Relationship="PracticeWorkDataModel.ConnectionQueue" FromRole="Queue" ToRole="Connection" />
+  </EntityType>
+  <EntityType Name="Routine">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Function" Type="String" Nullable="false" />
+    <NavigationProperty Name="Model" Relationship="PracticeWorkDataModel.ModelRoutine" FromRole="Routine" ToRole="Model" />
+    <Property Name="ModelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Queue" Relationship="PracticeWorkDataModel.QueueRoutine" FromRole="Routine" ToRole="Queue" />
+    <Property Name="QueueId" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Router">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="ConnectionSpeed" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Model" Relationship="PracticeWorkDataModel.ModelRouter" FromRole="Router" ToRole="Model" />
+    <Property Name="ModelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Connection" Relationship="PracticeWorkDataModel.RouterConnection" FromRole="Router" ToRole="Connection" />
+  </EntityType>
+  <EntityType Name="Connection">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Name" Type="String" Nullable="false" />
+    <Property Name="Description" Type="String" Nullable="false" />
+    <Property Name="D1" Type="String" Nullable="false" />
+    <Property Name="D2" Type="String" Nullable="false" />
+    <NavigationProperty Name="Model" Relationship="PracticeWorkDataModel.ModelConnection" FromRole="Connection" ToRole="Model" />
+    <Property Name="ModelId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Router" Relationship="PracticeWorkDataModel.RouterConnection" FromRole="Connection" ToRole="Router" />
+    <Property Name="RouterId" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="Server" Relationship="PracticeWorkDataModel.ConnectionServer" FromRole="Connection" ToRole="Server" />
+    <NavigationProperty Name="Device" Relationship="PracticeWorkDataModel.ConnectionDevice" FromRole="Connection" ToRole="Device" />
+    <NavigationProperty Name="Queue" Relationship="PracticeWorkDataModel.ConnectionQueue" FromRole="Connection" ToRole="Queue" />
+    <NavigationProperty Name="Computer" Relationship="PracticeWorkDataModel.ConnectionComputer" FromRole="Connection" ToRole="Computer" />
+  </EntityType>
+  <Association Name="ModelComputer">
+    <End Type="PracticeWorkDataModel.Model" Role="Model" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Computer" Role="Computer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Computer">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelConnection">
+    <End Type="PracticeWorkDataModel.Model" Role="Model" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Connection" Role="Connection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Connection">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelDevice">
+    <End Type="PracticeWorkDataModel.Model" Role="Model" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Device" Role="Device" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Device">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelRouter">
+    <End Type="PracticeWorkDataModel.Model" Role="Model" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Router" Role="Router" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Router">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelQueue">
+    <End Type="PracticeWorkDataModel.Model" Role="Model" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Queue" Role="Queue" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Queue">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelRoutine">
+    <End Type="PracticeWorkDataModel.Model" Role="Model" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Routine" Role="Routine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Routine">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ModelServer">
+    <End Type="PracticeWorkDataModel.Model" Role="Model" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Server" Role="Server" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Model">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Server">
+        <PropertyRef Name="ModelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="DeviceQueue">
+    <End Type="PracticeWorkDataModel.Device" Role="Device" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Queue" Role="Queue" Multiplicity="0..1" />
+  </Association>
+  <Association Name="QueueRoutine">
+    <End Type="PracticeWorkDataModel.Queue" Role="Queue" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Routine" Role="Routine" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Queue">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Routine">
+        <PropertyRef Name="QueueId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="RouterConnection">
+    <End Type="PracticeWorkDataModel.Router" Role="Router" Multiplicity="1" />
+    <End Type="PracticeWorkDataModel.Connection" Role="Connection" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Router">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Connection">
+        <PropertyRef Name="RouterId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="ConnectionServer">
+    <End Type="PracticeWorkDataModel.Connection" Role="Connection" Multiplicity="*" />
+    <End Type="PracticeWorkDataModel.Server" Role="Server" Multiplicity="*" />
+  </Association>
+  <Association Name="ConnectionDevice">
+    <End Type="PracticeWorkDataModel.Connection" Role="Connection" Multiplicity="*" />
+    <End Type="PracticeWorkDataModel.Device" Role="Device" Multiplicity="*" />
+  </Association>
+  <Association Name="ConnectionQueue">
+    <End Type="PracticeWorkDataModel.Connection" Role="Connection" Multiplicity="*" />
+    <End Type="PracticeWorkDataModel.Queue" Role="Queue" Multiplicity="*" />
+  </Association>
+  <Association Name="ConnectionComputer">
+    <End Type="PracticeWorkDataModel.Connection" Role="Connection" Multiplicity="*" />
+    <End Type="PracticeWorkDataModel.Computer" Role="Computer" Multiplicity="*" />
+  </Association>
+</Schema>

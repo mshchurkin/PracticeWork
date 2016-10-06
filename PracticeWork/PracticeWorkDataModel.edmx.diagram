@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9bd0b0fe3d5044e2842be9014e853eff" Name="Diagram1" ZoomLevel="68" >
+        <EntityTypeShape EntityType="PracticeWorkDataModel.Model" Width="1.5" PointX="0.5" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeWorkDataModel.Computer" Width="1.5" PointX="4.5" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeWorkDataModel.Device" Width="1.5" PointX="6.75" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeWorkDataModel.Server" Width="1.5" PointX="2.375" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeWorkDataModel.Queue" Width="1.5" PointX="9" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeWorkDataModel.Routine" Width="1.5" PointX="11.125" PointY="0.5" />
+        <EntityTypeShape EntityType="PracticeWorkDataModel.Router" Width="1.5" PointX="0.5" PointY="4.375" />
+        <EntityTypeShape EntityType="PracticeWorkDataModel.Connection" Width="1.5" PointX="5.25" PointY="4.5" />
+        <AssociationConnector Association="PracticeWorkDataModel.ModelComputer" />
+        <AssociationConnector Association="PracticeWorkDataModel.ModelConnection" />
+        <AssociationConnector Association="PracticeWorkDataModel.ModelDevice" />
+        <AssociationConnector Association="PracticeWorkDataModel.ModelRouter" />
+        <AssociationConnector Association="PracticeWorkDataModel.ModelQueue" />
+        <AssociationConnector Association="PracticeWorkDataModel.ModelRoutine" />
+        <AssociationConnector Association="PracticeWorkDataModel.ModelServer" />
+        <AssociationConnector Association="PracticeWorkDataModel.DeviceQueue" />
+        <AssociationConnector Association="PracticeWorkDataModel.QueueRoutine" />
+        <AssociationConnector Association="PracticeWorkDataModel.RouterConnection" />
+        <AssociationConnector Association="PracticeWorkDataModel.ConnectionServer" />
+        <AssociationConnector Association="PracticeWorkDataModel.ConnectionDevice" />
+        <AssociationConnector Association="PracticeWorkDataModel.ConnectionQueue" />
+        <AssociationConnector Association="PracticeWorkDataModel.ConnectionComputer" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

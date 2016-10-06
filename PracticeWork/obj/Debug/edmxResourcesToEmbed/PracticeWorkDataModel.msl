@@ -1,0 +1,139 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PracticeWorkDataModelStoreContainer" CdmEntityContainer="PracticeWorkDataModelContainer">
+    <EntitySetMapping Name="ModelSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PracticeWorkDataModel.Model)">
+        <MappingFragment StoreEntitySet="ModelSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComputerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PracticeWorkDataModel.Computer)">
+        <MappingFragment StoreEntitySet="ComputerSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Processor" ColumnName="Processor" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="Memory" ColumnName="Memory" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DeviceSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PracticeWorkDataModel.Device)">
+        <MappingFragment StoreEntitySet="DeviceSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="Memory" ColumnName="Memory" />
+          <ScalarProperty Name="VideoMemory" ColumnName="VideoMemory" />
+          <ScalarProperty Name="HaveQueue" ColumnName="HaveQueue" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ServerSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PracticeWorkDataModel.Server)">
+        <MappingFragment StoreEntitySet="ServerSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="RAM" ColumnName="RAM" />
+          <ScalarProperty Name="Memory" ColumnName="Memory" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="QueueSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PracticeWorkDataModel.Queue)">
+        <MappingFragment StoreEntitySet="QueueSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="NumberInQueue" ColumnName="NumberInQueue" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RoutineSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PracticeWorkDataModel.Routine)">
+        <MappingFragment StoreEntitySet="RoutineSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Function" ColumnName="Function" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="QueueId" ColumnName="QueueId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="RouterSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PracticeWorkDataModel.Router)">
+        <MappingFragment StoreEntitySet="RouterSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="ConnectionSpeed" ColumnName="ConnectionSpeed" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ConnectionSet">
+      <EntityTypeMapping TypeName="IsTypeOf(PracticeWorkDataModel.Connection)">
+        <MappingFragment StoreEntitySet="ConnectionSet">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="D1" ColumnName="D1" />
+          <ScalarProperty Name="D2" ColumnName="D2" />
+          <ScalarProperty Name="ModelId" ColumnName="ModelId" />
+          <ScalarProperty Name="RouterId" ColumnName="RouterId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="DeviceQueue" TypeName="PracticeWorkDataModel.DeviceQueue" StoreEntitySet="QueueSet">
+      <EndProperty Name="Device">
+        <ScalarProperty Name="Id" ColumnName="Device_Id" />
+      </EndProperty>
+      <EndProperty Name="Queue">
+        <ScalarProperty Name="Id" ColumnName="Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ConnectionServer" TypeName="PracticeWorkDataModel.ConnectionServer" StoreEntitySet="ConnectionServer">
+      <EndProperty Name="Connection">
+        <ScalarProperty Name="Id" ColumnName="Connection_Id" />
+      </EndProperty>
+      <EndProperty Name="Server">
+        <ScalarProperty Name="Id" ColumnName="Server_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ConnectionDevice" TypeName="PracticeWorkDataModel.ConnectionDevice" StoreEntitySet="ConnectionDevice">
+      <EndProperty Name="Connection">
+        <ScalarProperty Name="Id" ColumnName="Connection_Id" />
+      </EndProperty>
+      <EndProperty Name="Device">
+        <ScalarProperty Name="Id" ColumnName="Device_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ConnectionQueue" TypeName="PracticeWorkDataModel.ConnectionQueue" StoreEntitySet="ConnectionQueue">
+      <EndProperty Name="Connection">
+        <ScalarProperty Name="Id" ColumnName="Connection_Id" />
+      </EndProperty>
+      <EndProperty Name="Queue">
+        <ScalarProperty Name="Id" ColumnName="Queue_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ConnectionComputer" TypeName="PracticeWorkDataModel.ConnectionComputer" StoreEntitySet="ConnectionComputer">
+      <EndProperty Name="Connection">
+        <ScalarProperty Name="Id" ColumnName="Connection_Id" />
+      </EndProperty>
+      <EndProperty Name="Computer">
+        <ScalarProperty Name="Id" ColumnName="Computer_Id" />
+      </EndProperty>
+    </AssociationSetMapping>
+  </EntityContainerMapping>
+</Mapping>
